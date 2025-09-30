@@ -1,0 +1,269 @@
+/* Vibrant golden-ratio inspired layout, responsive */
+:root{
+  --bg:#0f1724;
+  --card:#0b1320;
+  --accent:#ffb74d;
+  --accent-2:#ffd88a;
+  --muted:#9aa7b2;
+  --primary:#7c4dff;
+  --success:#2ecc71;
+  --danger:#ff5252;
+  --glass: rgba(255,255,255,0.03);
+  --radius:14px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,#071226 0%,#072b39 100%); color:#e6eef6}
+
+/* ---------- NEW LOGIN PAGE STYLES ---------- */
+#login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+.login-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding: 40px 50px;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 40px rgba(2,6,23,0.6);
+}
+.login-card h1 {
+    color: var(--accent-2);
+    margin-bottom: 8px;
+}
+.login-card p {
+    color: var(--muted);
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+/* ------------------------------------------- */
+
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+.brand h1{margin:0;font-size:22px;letter-spacing:0.6px;color:var(--accent-2)}
+.tag{margin:0;font-size:12px;color:var(--muted)}
+
+.actions .btn{margin-left:10px}
+.actions .user-info {
+    color: var(--muted);
+    margin-right: 15px;
+    font-size: 14px;
+}
+.btn{
+  background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;color:inherit;cursor:pointer;
+  transition:all .15s; font-weight:600;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:linear-gradient(90deg,var(--primary),#a46bff);border:0;color:white;box-shadow:0 6px 20px rgba(124,77,255,0.12)}
+.btn.success{background:linear-gradient(90deg,var(--success),#43d96f);border:0;color:#08200a}
+.btn.danger{background:linear-gradient(90deg,var(--danger),#ff6b6b);border:0;color:white}
+
+#main-app { height: 100vh; display: flex; flex-direction: column; }
+.layout{display:flex;height:calc(100% - 72px)}
+.sidebar{
+  width:260px;padding:22px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-right:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;
+}
+.sidebar ul{list-style:none;padding:0;margin:0}
+.sidebar li{padding:12px 10px;border-radius:10px;margin-bottom:8px;cursor:pointer;color:var(--muted)}
+.sidebar li.active{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));color:var(--accent-2);font-weight:700}
+.footer-note{margin-top:auto;color:var(--muted);font-size:12px;padding-top:20px}
+
+.content{flex:1;padding:20px;overflow:auto}
+.page{display:none}
+.page.active{display:block}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:var(--radius);box-shadow:0 8px 40px rgba(2,6,23,0.6);margin-bottom:18px}
+.hero{display:flex;align-items:center;gap:20px}
+.hero-left{flex:1}
+.hero-right{width:320px}
+.hero h2{margin:0;font-size:26px;color:var(--accent)}
+.hero p{color:var(--muted)}
+
+.stats{display:flex;gap:12px;margin-top:14px}
+.card.stat{padding:14px;background:linear-gradient(90deg,rgba(255,255,255,0.01),rgba(255,255,255,0.006));border-radius:12px;text-align:center;flex:1}
+.num{font-size:22px;font-weight:800;color:var(--accent-2)}
+.label{font-size:12px;color:var(--muted)}
+
+.form-card label{display:block;margin-bottom:12px}
+.form-card input, .form-card select, .report-controls input {width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+.row{display:flex;gap:12px;align-items:flex-start}
+.camera-col{flex:1;display:flex;flex-direction:column;align-items:center}
+.photo-col{width:340px;text-align:center}
+video{background:#02111a;border-radius:10px;width:100%;height:220px;object-fit:cover}
+#photo-canvas{width:320px;border-radius:8px;background:#041826}
+
+.cam-controls{margin-top:8px;display:flex;gap:8px}
+.form-actions{margin-top:12px;text-align:right}
+.students-list .grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.student-tile{width:140px;background:var(--glass);padding:8px;border-radius:10px;text-align:center}
+.student-tile img{width:100%;height:90px;object-fit:cover;border-radius:6px}
+.small-note{font-size:12px;color:var(--muted);margin-top:6px}
+
+.controls{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+#recog-video{width:100%;height:360px;border-radius:10px;background:#02111a;object-fit:cover}
+canvas#overlay{
+    pointer-events:none;
+}
+
+.log{max-height:140px;overflow:auto;background:rgba(255,255,255,0.01);padding:8px;margin-top:8px;border-radius:8px}
+.log p{margin:6px 0;color:var(--muted);font-size:13px}
+
+#qrcode{padding:12px;background:rgba(255,255,255,0.02);display:inline-block;border-radius:8px}
+
+input[type="range"]{width:70%}
+.small-note{color:var(--muted);font-size:13px}
+
+.student-tile button.delete-btn {
+    background: #e11d48;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.3s ease;
+}
+
+.student-tile button.delete-btn:hover {
+    background: #be123c;
+}
+
+.report-controls {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* For responsiveness */
+}
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.control-group label {
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 14px;
+}
+.control-group > div {
+    display: flex;
+    gap: 10px;
+}
+
+/* ---------- RESPONSIVE STYLES (FOR MOBILE AND TABLET) ---------- */
+@media (max-width: 768px) {
+    /* --- General Layout --- */
+    .layout {
+        flex-direction: column;
+        height: auto;
+    }
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px;
+    }
+    .sidebar ul {
+        display: flex;
+        gap: 10px;
+    }
+    .sidebar li {
+        margin-bottom: 0;
+        white-space: nowrap;
+    }
+    .footer-note {
+        display: none;
+    }
+    .content {
+        padding: 15px;
+    }
+    .topbar {
+        padding: 12px 15px;
+    }
+
+    /* --- Login Page --- */
+    .login-card {
+        padding: 30px 20px;
+        width: 90%;
+    }
+
+    /* --- Dashboard Page --- */
+    .hero {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .hero-right {
+        width: 100%;
+    }
+    .stats {
+        flex-wrap: wrap;
+    }
+
+    /* --- Add Student Page --- */
+    .form-card .row {
+        flex-direction: column;
+    }
+    .photo-col {
+        width: 100%;
+    }
+    video, #photo-canvas {
+        width: 100%;
+        height: auto;
+    }
+    .student-tile {
+        width: calc(50% - 5px); /* Two tiles per row */
+    }
+
+    /* --- Mark Attendance Page --- */
+    .controls {
+        flex-wrap: wrap;
+    }
+    #recog-video {
+        height: auto; /* Allow video height to adjust */
+    }
+
+    /* --- General Elements --- */
+    .btn {
+        padding: 10px 15px; /* Larger touch targets for buttons */
+    }
+    .actions .btn {
+      margin-left: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .student-tile {
+        width: 100%; /* One tile per row on very small screens */
+    }
+    .topbar {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+    .actions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    .actions .user-info {
+      margin-right: 0;
+      margin-bottom: 5px;
+    }
+    .actions .btn {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+/* This code targets and styles ONLY the calendar icon */
+#report-date::-webkit-calendar-picker-indicator {
+  /* This filter inverts the icon's color, making it white */
+  filter: invert(1);
+  cursor: pointer;
+}

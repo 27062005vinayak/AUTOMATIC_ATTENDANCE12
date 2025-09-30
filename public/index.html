@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Presentify - Parent Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<section id="login-page">
+    <div class="login-card">
+        <h1>Presentify</h1>
+        <p>Automated Attendance for Rural Schools</p>
+        <button id="btn-google-login" class="btn primary">Login with Google</button>
+    </div>
+</section>
+
+<div id="main-app" style="display: none;">
+  <header class="topbar">
+    <div class="brand">
+      <h1>Presentify</h1>
+      <p class="tag">Automated Attendance for Rural Schools</p>
+    </div>
+    <div id="auth-actions" class="actions">
+      <span id="user-display" class="user-info" style="display:none;"></span>
+      <button id="btn-logout" class="btn danger" style="display:none;">Logout</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <nav class="sidebar">
+      <ul>
+        <li class="active" data-page="dashboard">Dashboard</li>
+        <li data-page="add-student">Add Student</li>
+        <li data-page="mark-attendance">Mark Attendance</li>
+        <li data-page="reports">Reports</li>
+        <li data-page="backup">Backup & Manual</li>
+        <li data-page="settings">Settings</li>
+      </ul>
+      <div class="footer-note">Offline Ready • Cloud Synced</div>
+    </nav>
+
+    <section class="content">
+      <section id="page-dashboard" class="page active">
+        <div class="hero">
+          <div class="hero-left">
+            <h2>Welcome</h2>
+            <p>Quick summary of today's attendance & students.</p>
+            <div class="stats">
+              <div class="card stat">
+                <div class="num" id="stat-total">0</div>
+                <div class="label">Students</div>
+              </div>
+              <div class="card stat">
+                <div class="num" id="stat-today">0</div>
+                <div class="label">Present Today</div>
+              </div>
+              <div class="card stat">
+                <div class="num" id="stat-synced">0</div>
+                <div class="label">Synced</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-right">
+            
+          </div>
+        </div>
+      </section>
+
+      <section id="page-add-student" class="page">
+        <h2>Add Student</h2>
+        <form id="student-form" class="card form-card">
+          <label>
+            Student Name
+            <input id="stu-name" required placeholder="e.g. Ravi Kumar" />
+          </label>
+          <label>
+            Roll / ID
+            <input id="stu-id" required placeholder="e.g. 23" />
+          </label>
+          <div class="row">
+            <div class="camera-col">
+              <video id="video" autoplay muted playsinline></video>
+              <div class="cam-controls">
+                <button id="btn-capture" class="btn">Capture Photo</button>
+                <button id="btn-clear-photo" class="btn danger">Clear</button>
+              </div>
+            </div>
+            <div class="photo-col">
+              <canvas id="photo-canvas" width="320" height="240"></canvas>
+              <div class="small-note">Captured face will be processed to create face embeddings.</div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn primary" id="btn-add-student">Add Student</button>
+          </div>
+        </form>
+        <div class="students-list card">
+          <h3>Saved Students</h3>
+          <div id="students-grid" class="grid"></div>
+        </div>
+      </section>
+      
+      <section id="page-mark-attendance" class="page">
+        <h2>Mark Attendance (Face Recognition)</h2>
+        <div class="card">
+          <div class="controls">
+            <button id="start-recog" class="btn success">Start Recognition</button>
+            <button id="stop-recog" class="btn danger" disabled>Stop</button>
+            <select id="class-select"></select>
+            <button id="manual-mark" class="btn">Manual Mark</button>
+          </div>
+          <video id="recog-video" autoplay muted playsinline></video>
+          <canvas id="overlay"></canvas>
+          <div id="recog-log" class="log"></div>
+        </div>
+      </section>
+
+      <section id="page-reports" class="page">
+        <h2>Reports</h2>
+        <div class="card">
+          <div class="report-controls">
+              <div class="control-group">
+                  <label>View Daily Report</label>
+                  <div>
+                      <input type="date" id="report-date" />
+                      <button id="btn-export-pdf" class="btn primary">Export Daily as PDF</button>
+                  </div>
+              </div>
+              <div class="control-group">
+                  <label>View Student History (Past 30 Days)</label>
+                  <div>
+                      <input type="text" id="history-stu-id" placeholder="Enter Student ID" />
+                      <button id="btn-get-history-pdf" class="btn success">Get History as PDF</button>
+                  </div>
+              </div>
+          </div>
+          <div id="report-output"></div>
+        </div>
+      </section>
+
+      <section id="page-backup" class="page">
+        <h2>Backup & Manual Marking</h2>
+         <div class="card">
+            <div class="actions">
+                <button id="btn-export" class="btn">Export Data</button>
+                <button id="btn-import" class="btn">Import Data</button>
+                <button id="btn-sync" class="btn success">Sync</button>
+            </div>
+         </div>
+        <div class="card">
+          <h3>Manual Mark</h3>
+          <label>
+            Student
+            <select id="manual-stu"></select>
+          </label>
+          <label>
+            Date
+            <input type="date" id="manual-date" />
+          </label>
+          <label>
+            Status
+            <select id="manual-status">
+              <option value="present">Present</option>
+              <option value="absent">Absent</option>
+            </select>
+          </label>
+          <button id="btn-manual-save" class="btn primary">Save</button>
+        </div>
+      </section>
+
+      <section id="page-settings" class="page">
+        <h2>Settings</h2>
+        <div class="card">
+          <label>
+            Recognition Threshold (distance)
+            <input type="range" id="threshold" min="0.3" max="0.8" step="0.01" value="0.55"/>
+            <span id="threshold-val">0.55</span>
+          </label>
+          <p class="small-note">Lower = stricter matching. Default 0.55 works well in many conditions.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <input type="file" id="import-file" accept="application/json" style="display:none" />
+</div>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
